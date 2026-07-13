@@ -20,10 +20,12 @@ public class ReservationLogic {
     public void CreateReservation(Reservation reservation){
         Event event = eventRepository.FindById(reservation.getEvent_id());
         if (event != null
-                && event.getStatus().equals("ACTIVE")
+                && event.getStatus().equals(Status.ACTIVE)
                 && reservation.getTicket_count() < event.getReserved_count()){
             reservationRepository.Save(reservation);
-            event.setReserved_count(event.getReserved_count() + reservation.getTicket_count());
+            event.setReserved_count(event.getReserved_count() - reservation.getTicket_count());
+            eventRepository.Update(event);
+            System.out.println("Reservation added successfully");
         }else {
             System.out.println("something we wrong");
         }
@@ -37,7 +39,7 @@ public class ReservationLogic {
             reservation.setStatus(Status.CANCELLED);
             Event event = eventRepository.FindById(reservation.getEvent_id());
             if (event != null){
-                event.setReserved_count(event.getReserved_count() - reservation.getTicket_count());
+                event.setReserved_count(event.getReserved_count() + reservation.getTicket_count());
                 System.out.println("almost done");
             }
         }else {

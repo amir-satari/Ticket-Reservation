@@ -12,7 +12,8 @@ public class DatabaseConnection {
     private static final String PASSWORD = "Nima.s.1";
 
     public static Connection getConnection(){
-        try (Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD)){
+        try {
+            Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             return connection;
 
         }catch (SQLException e){

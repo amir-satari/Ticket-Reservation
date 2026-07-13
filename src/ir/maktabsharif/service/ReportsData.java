@@ -1,5 +1,6 @@
 package ir.maktabsharif.service;
 
+import ir.maktabsharif.model.enums.Status;
 import ir.maktabsharif.model.models.Event;
 import ir.maktabsharif.model.models.Reservation;
 import ir.maktabsharif.repository.Impl.EventRepositoryImpl;
@@ -22,7 +23,7 @@ public class ReportsData {
 
     public void TotalNumberOfActiveEvents(){
         List<Event> events = eventRepository.FIndAll();
-        events.stream().filter(e -> e.getStatus().equals("ACTIVE")).forEach(System.out::println);
+        events.stream().filter(e -> e.getStatus().equals(Status.ACTIVE)).forEach(System.out::println);
     }
 
 
@@ -39,8 +40,7 @@ public class ReportsData {
 
     public List<Reservation> ListOfActiveReservations(){
         List<Reservation> reservations = reservationRepository.FIndAll();
-        Predicate<Reservation> reservationPredicate = (r)-> r.getStatus().equals("ACTIVE");
-        List<Reservation> reservations1 = reservations.stream().filter(reservationPredicate).toList();
+        List<Reservation> reservations1 = reservations.stream().filter(r -> r.getStatus().equals(Status.ACTIVE)).toList();
         return reservations1;
     }
 

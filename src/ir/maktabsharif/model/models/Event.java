@@ -71,6 +71,7 @@ public class Event extends BaseModel {
     @Override
     public String toString() {
         return "Event{" +
+                "id='"+getId() + '\''+
                 "title='" + title + '\'' +
                 ", location='" + location + '\'' +
                 ", capacity=" + capacity +

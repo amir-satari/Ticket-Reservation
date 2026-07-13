@@ -6,10 +6,7 @@ import ir.maktabsharif.model.models.Reservation;
 import ir.maktabsharif.repository.GenericRepository;
 import ir.maktabsharif.util.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +81,7 @@ public class ReservationRepositoryImpl implements GenericRepository<Reservation>
         Connection connection = DatabaseConnection.getConnection();
         String query = "SELECT * FROM Reservation WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)){
-            ps.setLong(1,id);
+            ps.setInt(1, Math.toIntExact(id));
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 Reservation reservation = new Reservation(

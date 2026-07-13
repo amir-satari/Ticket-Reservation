@@ -15,12 +15,12 @@ public class Reservation extends BaseModel {
     private Status status;
 
 
-    public Reservation(String customer_name, String customer_phone, Long event_id, int ticket_count,  Status status) {
+    public Reservation(String customer_name, String customer_phone, Long event_id, int ticket_count,Date date, Status status) {
         this.customer_name = customer_name;
         this.customer_phone = customer_phone;
         this.event_id = event_id;
         this.ticket_count = ticket_count;
-        this.reservation_date = Date.valueOf(LocalDate.now());
+        this.reservation_date = date;
         this.status = status;
     }
 
@@ -75,6 +75,7 @@ public class Reservation extends BaseModel {
     @Override
     public String toString() {
         return "Reservation{" +
+                "id='"+getId() + '\''+
                 "customer_name='" + customer_name + '\'' +
                 ", customer_phone='" + customer_phone + '\'' +
                 ", event_id=" + event_id +
