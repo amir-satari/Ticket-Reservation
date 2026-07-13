@@ -1,5 +1,7 @@
 package ir.maktabsharif.repository.Impl;
 
+import ir.maktabsharif.exception.EventCancelledException;
+import ir.maktabsharif.exception.EventNotFoundException;
 import ir.maktabsharif.exception.ReposioryLayerException;
 import ir.maktabsharif.model.enums.Status;
 import ir.maktabsharif.model.models.Event;
@@ -78,7 +80,7 @@ public class EventRepositoryImpl implements GenericRepository<Event> {
             int rowsAffects = ps.executeUpdate();
             return rowsAffects > 0;
         }catch (SQLException e){
-            throw new ReposioryLayerException("The operation encountered a problem");
+            throw new EventCancelledException("The operation encountered a problem");
         }
     }
 
@@ -104,7 +106,7 @@ public class EventRepositoryImpl implements GenericRepository<Event> {
             }
             return null;
         }catch (SQLException e ){
-            throw new ReposioryLayerException("The operation encountered a problem");
+            throw new EventNotFoundException("The operation encountered a problem");
         }
     }
 
@@ -130,7 +132,7 @@ public class EventRepositoryImpl implements GenericRepository<Event> {
             }
             return events;
         } catch (SQLException e) {
-            throw new ReposioryLayerException("The operation encountered a problem");
+            throw new EventNotFoundException("The operation encountered a problem");
         }
 
     }

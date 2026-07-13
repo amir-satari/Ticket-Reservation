@@ -1,6 +1,7 @@
 package ir.maktabsharif.repository.Impl;
 
 import ir.maktabsharif.exception.ReposioryLayerException;
+import ir.maktabsharif.exception.ReservationNotFoundException;
 import ir.maktabsharif.model.enums.Status;
 import ir.maktabsharif.model.models.Reservation;
 import ir.maktabsharif.repository.GenericRepository;
@@ -59,7 +60,7 @@ public class ReservationRepositoryImpl implements GenericRepository<Reservation>
             return null;
 
         }catch (SQLException e){
-            throw new ReposioryLayerException("The operation encountered a problem");
+            throw new ReservationNotFoundException("The operation encountered a problem");
         }
     }
 
@@ -72,7 +73,7 @@ public class ReservationRepositoryImpl implements GenericRepository<Reservation>
             int rowsAffects = ps.executeUpdate();
             return rowsAffects > 0;
         }catch (SQLException e){
-            throw new ReposioryLayerException("The operation encountered a problem");
+            throw new ReservationNotFoundException("The operation encountered a problem");
         }
     }
 
@@ -98,7 +99,7 @@ public class ReservationRepositoryImpl implements GenericRepository<Reservation>
             }
             return null;
         }catch (SQLException e){
-            throw new ReposioryLayerException("The operation encountered a problem");
+            throw new ReservationNotFoundException("The operation encountered a problem");
         }
     }
 
@@ -123,7 +124,7 @@ public class ReservationRepositoryImpl implements GenericRepository<Reservation>
             }
             return reservations;
         }catch (SQLException e){
-            throw new ReposioryLayerException("The operation encountered a problem");
+            throw new ReservationNotFoundException("The operation encountered a problem");
         }
     }
 }

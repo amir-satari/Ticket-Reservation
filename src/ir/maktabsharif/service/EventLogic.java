@@ -1,5 +1,7 @@
 package ir.maktabsharif.service;
 
+import ir.maktabsharif.exception.BusinessException;
+import ir.maktabsharif.exception.InvalidDataException;
 import ir.maktabsharif.model.enums.Status;
 import ir.maktabsharif.model.models.Event;
 import ir.maktabsharif.repository.Impl.EventRepositoryImpl;
@@ -34,12 +36,17 @@ public class EventLogic {
     }
 
     public void CreateEvent(Event event){
-        if (creatingOrUpdatingValidation(event)){
-            if (eventRepository.Save(event)){
-                System.out.println("event add successfully");
-                System.out.println(event);
+        try {
+            if (creatingOrUpdatingValidation(event)){
+                if (eventRepository.Save(event)){
+                    System.out.println("event add successfully");
+                    System.out.println(event);
+                }
             }
+        }catch (Exception e){
+            throw new BusinessException("Business Exception");
         }
+
     }
 
     public void ShowAllEvents(){
@@ -48,36 +55,51 @@ public class EventLogic {
     }
 
     public void UpdateEvent(Event event){
-        if (creatingOrUpdatingValidation(event)){
-            Event event1 = eventRepository.Update(event);
-            if (event1 != null){
-                System.out.println("Update Event successfully");
-                System.out.println(event1);
-            }else {
-                System.out.println("something we wrong");
+        try {
+            if (creatingOrUpdatingValidation(event)){
+                Event event1 = eventRepository.Update(event);
+                if (event1 != null){
+                    System.out.println("Update Event successfully");
+                    System.out.println(event1);
+                }else {
+                    System.out.println("something we wrong");
+                }
             }
+        }catch (Exception e){
+            throw new InvalidDataException("Business Exception");
         }
+
     }
 
     public void CancelEvent(Long id){
         Event event = eventRepository.FindById(id);
-        if (event != null){
-            event.setStatus(Status.CANCELLED);
-            eventRepository.Update(event);
-        }else {
-            System.out.println("Something we wrong");
+        try {
+            if (event != null){
+                event.setStatus(Status.CANCELLED);
+                eventRepository.Update(event);
+            }else {
+                System.out.println("Something we wrong");
+            }
+        }catch (Exception e){
+            throw new BusinessException("Business Exception");
         }
+
 
     }
 
     public boolean isActive(Event event){
         Event event1 = eventRepository.FindById(event.getId());
-        if (event1 != null){
-            if (event1.getStatus().equals(Status.ACTIVE)){
-                return true;
+        try {
+            if (event1 != null){
+                if (event1.getStatus().equals(Status.ACTIVE)){
+                    return true;
+                }
             }
+            return false;
+        }catch (Exception e){
+            throw new BusinessException("Business Exception");
         }
-        return false;
+
     }
 
 
