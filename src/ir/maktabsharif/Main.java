@@ -210,6 +210,15 @@ public class Main {
         reportsData.MostExpensiveEvent();
 
 
+        System.out.println();
+        System.out.println("CancelEvent");
+        eventLogic.CancelEvent(event2.getId());
+
+        System.out.println();
+        System.out.println("isActive");
+        System.out.println(eventLogic.isActive(event4)?"yes is active":"no is notactive");
+
+
 
     }
 }

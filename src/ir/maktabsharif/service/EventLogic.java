@@ -42,7 +42,7 @@ public class EventLogic {
                     System.out.println("event add successfully");
                     System.out.println(event);
                 }
-            }
+            }else throw new BusinessException("Business Exception");
         }catch (Exception e){
             throw new BusinessException("Business Exception");
         }
@@ -64,7 +64,7 @@ public class EventLogic {
                 }else {
                     System.out.println("something we wrong");
                 }
-            }
+            }else throw new BusinessException("Business Exception");
         }catch (Exception e){
             throw new InvalidDataException("Business Exception");
         }

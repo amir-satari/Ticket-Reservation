@@ -39,7 +39,6 @@ public class ReservationLogic {
 
     }
 
-
     public void CancelReservation(Long id){
         Reservation reservation = reservationRepository.FindById(id);
         try {
